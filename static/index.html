@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图谱引擎</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f17;--bg2:#131621;--bg3:#1a1e2e;
+  --border:#252a40;--border2:#2f3550;
+  --text:#e2e4ee;--text2:#8b90a8;--text3:#555c7a;
+  --blue:#4e8ef7;--blue-bg:#1a2340;
+  --green:#3ecf8e;--green-bg:#0d2420;
+  --amber:#f5a623;--amber-bg:#2a1f0d;
+  --red:#f56565;--red-bg:#2a1010;
+  --purple:#9f7aea;--teal:#38b2ac;
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;display:flex;flex-direction:column}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;height:52px;display:flex;align-items:center;gap:16px;flex-shrink:0}
+.logo{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+#stat-chips{display:flex;gap:8px;margin-left:auto}
+.chip{font-size:11px;color:var(--text2);background:var(--bg3);border:1px solid var(--border);padding:3px 10px;border-radius:20px;white-space:nowrap}
+.nav-btn{font-size:12px;color:var(--text2);background:var(--bg3);border:1px solid var(--border);padding:5px 12px;border-radius:6px;cursor:pointer;text-decoration:none}
+.nav-btn:hover{color:var(--text)}
+.layout{display:flex;flex:1;min-height:0}
+.sidebar{width:300px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;min-height:0}
+.side-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.side-tab{flex:1;padding:10px 0;text-align:center;font-size:12px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:color .12s}
+.side-tab:hover{color:var(--text)}
+.side-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.side-panel{display:none;flex:1;flex-direction:column;min-height:0;overflow:hidden}
+.side-panel.active{display:flex}
+.search-bar{padding:12px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;gap:8px}
+.side-scroll{flex:1;overflow-y:auto;padding:8px}
+.side-scroll::-webkit-scrollbar{width:3px}
+.side-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.path-form{padding:12px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--border);flex-shrink:0}
+.path-form label{font-size:11px;color:var(--text2);margin-bottom:2px;display:block}
+.inp{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:7px 10px;border-radius:6px;font-size:13px;outline:none}
+.inp:focus{border-color:var(--blue)}
+.btn{background:var(--blue);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.btn:hover{opacity:.82}
+.btn.sm{padding:5px 10px;font-size:11px}
+.btn.ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn.ghost:hover{color:var(--text)}
+.co-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:border-color .12s}
+.co-card:hover,.co-card.sel{border-color:var(--blue);background:var(--blue-bg)}
+.co-name{font-size:13px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.co-code{font-size:11px;color:var(--text3);background:var(--bg2);padding:2px 6px;border-radius:4px}
+.co-sub{font-size:11px;color:var(--text2);margin-top:3px}
+.concept-row{padding:7px 10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:13px;transition:background .1s}
+.concept-row:hover{background:var(--bg3)}
+.main{flex:1;display:flex;flex-direction:column;min-height:0;min-width:0}
+.view-tabs{padding:0 20px;border-bottom:1px solid var(--border);display:flex;gap:4px;flex-shrink:0}
+.view-tab{padding:12px 14px;font-size:12px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:color .12s}
+.view-tab:hover{color:var(--text)}
+.view-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.view{display:none;flex:1;flex-direction:column;min-height:0;overflow:hidden}
+.view.active{display:flex}
+#graph-wrap{flex:1;position:relative;min-height:0;background:var(--bg)}
+#graph-svg{display:block;width:100%;height:100%}
+.zoom-btns{position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:6px;z-index:10}
+.zoom-btn{width:32px;height:32px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;user-select:none;transition:color .1s}
+.zoom-btn:hover{color:var(--text);border-color:var(--border2)}
+.graph-legend{position:absolute;bottom:16px;left:16px;background:rgba(19,22,33,.92);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:11px;line-height:2;z-index:10}
+.leg-title{color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.leg-row{display:flex;align-items:center;gap:7px;color:var(--text2)}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.leg-line{width:18px;height:2px;flex-shrink:0;border-radius:1px}
+.detail-scroll{flex:1;overflow-y:auto;padding:20px}
+.detail-scroll::-webkit-scrollbar{width:3px}
+.detail-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.sec-title{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);margin-bottom:10px}
+.res-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px}
+.sbar{height:3px;background:var(--border);border-radius:2px;margin-top:8px}
+.sfill{height:100%;border-radius:2px;background:var(--blue)}
+.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin-right:4px}
+.tag-pos{background:var(--green-bg);color:var(--green)}
+.tag-neg{background:var(--red-bg);color:var(--red)}
+.tag-neu{background:var(--bg3);color:var(--text2)}
+.tag-eq{background:var(--blue-bg);color:var(--blue)}
+.tag-sup{background:var(--amber-bg);color:var(--amber)}
+.tag-ex{background:#1a1040;color:var(--purple)}
+.tag-con{background:#0d2020;color:var(--teal)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{color:var(--text3);font-weight:400;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);font-size:11px}
+td{padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+.rbar{display:flex;align-items:center;gap:6px}
+.rbar-fill{height:4px;background:var(--blue);border-radius:2px}
+.empty{text-align:center;color:var(--text3);padding:40px 20px;font-size:13px}
+.empty-icon{font-size:32px;margin-bottom:10px}
+.loading{text-align:center;color:var(--text3);padding:20px;font-size:12px}
+#tt{position:fixed;background:#1a1e2e;border:1px solid #2f3550;color:var(--text);padding:8px 12px;border-radius:8px;font-size:12px;pointer-events:none;z-index:9999;max-width:220px;line-height:1.6;opacity:0;transition:opacity .1s}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border2);color:var(--text);padding:8px 18px;border-radius:8px;font-size:12px;z-index:9998;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><div class="logo-dot"></div>图谱引擎</div>
+  <div id="stat-chips"><span class="chip">连接中...</span></div>
+  <a href="/data.html" class="nav-btn">⚙ 数据管理</a>
+</header>
+<div class="layout">
+  <div class="sidebar">
+    <div class="side-tabs">
+      <div class="side-tab active" data-panel="search">搜索</div>
+      <div class="side-tab" data-panel="path">路径</div>
+      <div class="side-tab" data-panel="concept">板块</div>
+    </div>
+    <div class="side-panel active" id="panel-search">
+      <div class="search-bar">
+        <input class="inp" id="q" placeholder="公司名或代码..." autocomplete="off">
+        <button class="btn" id="search-btn">搜索</button>
+      </div>
+      <div class="side-scroll" id="search-results">
+        <div class="empty"><div class="empty-icon">🔍</div>搜索公司名称</div>
+      </div>
+    </div>
+    <div class="side-panel" id="panel-path">
+      <div class="path-form">
+        <div><label>起点</label><input class="inp" id="path-from" placeholder="如：宁德时代"></div>
+        <div><label>终点</label><input class="inp" id="path-to" placeholder="如：紫金矿业"></div>
+        <div><label>关系类型（可选）</label><input class="inp" id="path-types" placeholder="supplies, holds..."></div>
+        <button class="btn" id="path-btn" style="width:100%">查找关联路径</button>
+      </div>
+      <div class="side-scroll" id="path-results">
+        <div class="empty"><div class="empty-icon">🔗</div>查找两公司间关联</div>
+      </div>
+    </div>
+    <div class="side-panel" id="panel-concept">
+      <div style="padding:10px 12px;font-size:11px;color:var(--text2);border-bottom:1px solid var(--border);flex-shrink:0">
+        选择板块查看传导受益标的
+      </div>
+      <div class="side-scroll" id="concept-list"><div class="loading">加载中...</div></div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="view-tabs">
+      <div class="view-tab active" data-view="graph">图谱</div>
+      <div class="view-tab" data-view="detail">详情</div>
+      <div class="view-tab" data-view="hidden">隐性关联</div>
+      <div class="view-tab" data-view="rank">影响力</div>
+    </div>
+    <div class="view active" id="view-graph">
+      <div id="graph-wrap">
+        <svg id="graph-svg"></svg>
+        <div class="zoom-btns">
+          <div class="zoom-btn" id="btn-zi">+</div>
+          <div class="zoom-btn" id="btn-zo">−</div>
+          <div class="zoom-btn" id="btn-zr" style="font-size:14px">⊙</div>
+        </div>
+        <div class="graph-legend">
+          <div class="leg-title">节点</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#4e8ef7"></div>公司</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#f5a623"></div>人物</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#3ecf8e"></div>概念</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#9f7aea"></div>机构</div>
+          <div class="leg-title" style="margin-top:6px">关系</div>
+          <div class="leg-row"><div class="leg-line" style="background:#4e8ef7"></div>供应</div>
+          <div class="leg-row"><div class="leg-line" style="background:#f5a623"></div>持股</div>
+          <div class="leg-row"><div class="leg-line" style="background:#3ecf8e"></div>概念</div>
+          <div class="leg-row"><div class="leg-line" style="background:#9f7aea"></div>任职</div>
+          <div class="leg-row"><div class="leg-line" style="background:#f56565"></div>竞争</div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-detail">
+      <div class="detail-scroll" id="detail-body">
+        <div class="empty"><div class="empty-icon">🏢</div>点击图谱中的节点查看详情</div>
+      </div>
+    </div>
+    <div class="view" id="view-hidden">
+      <div class="detail-scroll" id="hidden-body">
+        <div class="empty">
+          <div class="empty-icon">🕵️</div>
+          <div style="margin-bottom:14px">扫描图谱，发现隐性关联信号</div>
+          <button class="btn" id="hidden-btn">全图隐性关联扫描</button>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-rank">
+      <div class="detail-scroll" id="rank-body">
+        <div class="empty">
+          <div class="empty-icon">📊</div>
+          <div style="margin-bottom:14px">基于供应链+股权的PageRank</div>
+          <button class="btn" id="rank-btn">计算影响力排名</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tt"></div>
+<div id="toast"></div>
+
+<script>
+// ─── 常量 ────────────────────────────────
+const NCOL={company:"#4e8ef7",person:"#f5a623",concept:"#3ecf8e",institution:"#9f7aea"};
+const ECOL={holds:"#f5a623",supplies:"#4e8ef7",belongs_to:"#3ecf8e",employs:"#9f7aea",competes:"#f56565"};
+const ELAB={holds:"持股",supplies:"供应",belongs_to:"概念",employs:"任职",competes:"竞争"};
+const HTYPE={equity_bridge:["tag-eq","股权桥梁"],supply_risk:["tag-sup","供应风险"],exec_network:["tag-ex","高管网络"],concept_resonance:["tag-con","概念共振"]};
+const HSIG={positive:["tag-pos","↑ 正面"],negative:["tag-neg","⚠ 风险"],neutral:["tag-neu","中性"]};
+
+// ─── 状态 ────────────────────────────────
+let _zoom=null,_zSvg=null,_sim=null,_curCo=null;
+
+// ─── 工具 ────────────────────────────────
+async function GET(url){
+  const r=await fetch(url);
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error||"HTTP "+r.status);}
+  return r.json();
+}
+function toast(msg,ms=2600){
+  const el=document.getElementById("toast");
+  el.textContent=msg;el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"),ms);
+}
+function showView(v){
+  document.querySelectorAll(".view-tab").forEach(t=>t.classList.toggle("active",t.dataset.view===v));
+  document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id==="view-"+v));
+}
+function showPanel(p){
+  document.querySelectorAll(".side-tab").forEach(t=>t.classList.toggle("active",t.dataset.panel===p));
+  document.querySelectorAll(".side-panel").forEach(el=>el.classList.toggle("active",el.id==="panel-"+p));
+}
+
+// ─── Tooltip ─────────────────────────────
+const TT=document.getElementById("tt");
+function ttShow(html,ev){TT.innerHTML=html;TT.style.opacity="1";ttPos(ev);}
+function ttPos(ev){
+  TT.style.left=Math.min(ev.clientX+14,window.innerWidth-235)+"px";
+  TT.style.top=Math.max(ev.clientY-10,6)+"px";
+}
+function ttHide(){TT.style.opacity="0";}
+
+// ─── Init ────────────────────────────────
+async function init(){
+  if(typeof d3==="undefined"){
+    document.getElementById("stat-chips").innerHTML='<span class="chip" style="color:#f56565">D3.js加载失败，请检查网络</span>';
+    return;
+  }
+  try{
+    const s=await GET("/api/stats");
+    document.getElementById("stat-chips").innerHTML=
+      `<span class="chip">${s.node_count} 节点</span>
+       <span class="chip">${s.edge_count} 关系</span>
+       <span class="chip">${s.node_types?.company||0} 公司</span>`;
+    loadConcepts();
+    loadFullGraph();
+  }catch(e){
+    document.getElementById("stat-chips").innerHTML='<span class="chip" style="color:#f56565">请先运行 python app.py</span>';
+  }
+}
+
+// ─── 事件绑定 ─────────────────────────────
+window.addEventListener("load",()=>{
+  document.querySelectorAll(".side-tab").forEach(t=>t.addEventListener("click",()=>showPanel(t.dataset.panel)));
+  document.querySelectorAll(".view-tab").forEach(t=>t.addEventListener("click",()=>showView(t.dataset.view)));
+  document.getElementById("search-btn").addEventListener("click",doSearch);
+  document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")doSearch();});
+  document.getElementById("path-btn").addEventListener("click",doPath);
+  document.getElementById("path-from").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("path-to").focus();});
+  document.getElementById("path-to").addEventListener("keydown",e=>{if(e.key==="Enter")doPath();});
+  document.getElementById("hidden-btn").addEventListener("click",()=>doHidden());
+  document.getElementById("rank-btn").addEventListener("click",doRank);
+  document.getElementById("btn-zi").addEventListener("click",()=>{if(_zoom&&_zSvg)_zSvg.transition().call(_zoom.scaleBy,1.35);});
+  document.getElementById("btn-zo").addEventListener("click",()=>{if(_zoom&&_zSvg)_zSvg.transition().call(_zoom.scaleBy,0.74);});
+  document.getElementById("btn-zr").addEventListener("click",()=>{
+    if(!_zoom||!_zSvg)return;
+    const w=document.getElementById("graph-wrap");
+    _zSvg.transition().call(_zoom.transform,d3.zoomIdentity.translate(w.clientWidth/2,w.clientHeight/2).scale(0.72));
+  });
+  init();
+});
+
+// ─── 搜索 ────────────────────────────────
+async function doSearch(){
+  const q=document.getElementById("q").value.trim();
+  if(!q)return;
+  const el=document.getElementById("search-results");
+  el.innerHTML='<div class="loading">搜索中...</div>';
+  try{
+    const list=await GET("/api/search?q="+encodeURIComponent(q));
+    if(!list.length){el.innerHTML='<div class="empty">未找到</div>';return;}
+    el.innerHTML=list.map(c=>`
+      <div class="co-card${_curCo===c.id?" sel":""}" data-id="${c.id}" data-lbl="${c.label}">
+        <div class="co-name">${c.label}<span class="co-code">${c.code||""}</span></div>
+        <div class="co-sub">${c.industry||""} ${c.market_cap?"· 市值"+c.market_cap+"亿":""}</div>
+      </div>`).join("");
+    el.querySelectorAll(".co-card").forEach(c=>c.addEventListener("click",()=>selectCo(c.dataset.id,c.dataset.lbl)));
+  }catch(e){el.innerHTML=`<div class="empty">${e.message}</div>`;}
+}
+
+// ─── 选公司 ──────────────────────────────
+async function selectCo(id,lbl){
+  _curCo=id;
+  document.querySelectorAll(".co-card").forEach(c=>c.classList.toggle("sel",c.dataset.id===id));
+  await Promise.all([loadDetail(id),loadSubGraph(id)]);
+  showView("detail");
+}
+
+// ─── 公司详情 ─────────────────────────────
+async function loadDetail(id){
+  const el=document.getElementById("detail-body");
+  el.innerHTML='<div class="loading">加载中...</div>';
+  try{
+    const [det,sup,sh]=await Promise.all([GET("/api/company/"+id),GET("/api/supply_chain/"+id),GET("/api/shareholders/"+id)]);
+    const n=det.node,sh_l=sh.direct_shareholders||[],ctrls=sh.ultimate_controllers||[];
+    const up=sup.upstream||[],dn=sup.downstream||[];
+    el.innerHTML=`
+      <div style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+          <span style="font-size:20px;font-weight:600">${n.label}</span>
+          <span class="co-code">${n.code||""}</span>
+          <span style="font-size:12px;color:var(--text2)">${n.industry||""}</span>
+          ${n.market_cap?`<span style="font-size:12px;color:var(--amber);margin-left:auto">市值 ${n.market_cap}亿</span>`:""}
+        </div>
+      </div>
+      ${sh_l.length?`<div style="margin-bottom:20px">
+        <div class="sec-title">直接股东</div>
+        <div class="res-card"><table>
+          <tr><th>股东</th><th>类型</th><th>持股</th></tr>
+          ${sh_l.slice(0,8).map(s=>`<tr>
+            <td>${s.name}</td>
+            <td><span class="tag tag-neu">${s.type}</span></td>
+            <td><div class="rbar"><div class="rbar-fill" style="width:${Math.min(s.ratio*180,100)}px"></div><span>${(s.ratio*100).toFixed(1)}%</span></div></td>
+          </tr>`).join("")}
+        </table>
+        ${ctrls.length?`<div style="margin-top:8px;font-size:12px;color:var(--text2)">穿透实控人：${ctrls.map(c=>`<b style="color:var(--text)">${c.name}</b>(${(c.penetrated_ratio*100).toFixed(1)}%)`).join("、")}</div>`:""}
+        </div>
+      </div>`:""}
+      ${up.length||dn.length?`<div style="margin-bottom:20px">
+        <div class="sec-title">供应链</div>
+        <div class="res-card">
+          ${up.length?`<div style="margin-bottom:10px">
+            <div style="font-size:11px;color:var(--text3);margin-bottom:6px">上游供应商</div>
+            <table><tr><th>公司</th><th>层级</th><th>重要性</th></tr>
+            ${up.slice(0,6).map(u=>`<tr>
+              <td style="cursor:pointer;color:var(--blue)" class="dl" data-id="${u.id}" data-lbl="${u.name}">${u.name}</td>
+              <td>L${u.hops}</td>
+              <td><div class="rbar"><div class="rbar-fill" style="width:${u.importance*80}px;background:var(--green)"></div><span>${(u.importance*100).toFixed(0)}%</span></div></td>
+            </tr>`).join("")}
+            </table></div>`:""}
+          ${dn.length?`<div><div style="font-size:11px;color:var(--text3);margin-bottom:6px">下游客户</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              ${dn.map(d=>`<span class="tag tag-neu dl" style="cursor:pointer" data-id="${d.id}" data-lbl="${d.name}">${d.name}</span>`).join("")}
+            </div></div>`:""}
+        </div>
+      </div>`:""}
+      <div style="margin-bottom:20px">
+        <div class="sec-title">关系网络（${det.neighbors.length}条）</div>
+        <div class="res-card"><table>
+          <tr><th>节点</th><th>关系</th><th>方向</th><th>权重</th></tr>
+          ${det.neighbors.slice(0,12).map(nb=>`<tr>
+            <td style="cursor:pointer;color:var(--blue)" class="dl" data-id="${nb.node.id}" data-lbl="${nb.node.label}">${nb.node.label}</td>
+            <td>${nb.edge_type}</td><td>${nb.direction==="out"?"→":"←"}</td><td>${nb.weight.toFixed(3)}</td>
+          </tr>`).join("")}
+        </table></div>
+      </div>
+      <button class="btn ghost sm" id="scan-btn" data-id="${id}">扫描该公司隐性关联</button>
+    `;
+    el.querySelectorAll(".dl").forEach(l=>l.addEventListener("click",()=>selectCo(l.dataset.id,l.dataset.lbl)));
+    document.getElementById("scan-btn")?.addEventListener("click",e=>doHidden(e.target.dataset.id));
+  }catch(e){el.innerHTML=`<div class="empty">${e.message}</div>`;}
+}
+
+// ─── 路径查询 ─────────────────────────────
+async function doPath(){
+  const from=document.getElementById("path-from").value.trim();
+  const to=document.getElementById("path-to").value.trim();
+  const types=document.getElementById("path-types").value.trim();
+  const el=document.getElementById("path-results");
+  if(!from||!to){toast("请填写起点和终点");return;}
+  el.innerHTML='<div class="loading">计算中...</div>';
+  try{
+    let url=`/api/path?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+    if(types)url+="&edge_types="+encodeURIComponent(types);
+    const data=await GET(url);
+    if(!data.found){el.innerHTML=`<div class="empty">${data.message}</div>`;return;}
+    const chain=data.nodes.map((n,i)=>{
+      const e=data.edges[i];
+      return `${i>0?`<div style="text-align:center;padding:2px 0"><div style="color:var(--text3);font-size:16px">↓</div><div style="font-size:10px;color:${ECOL[e?.type]||"#888"}">${ELAB[e?.type]||e?.type||""}</div></div>`:""}
+        <div class="dl" style="background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue);padding:6px 10px;border-radius:6px;font-size:12px;font-weight:500;text-align:center;cursor:pointer" data-id="${n.id}" data-lbl="${n.label}">${n.label}</div>`;
+    }).join("");
+    el.innerHTML=`<div style="padding:12px"><div style="font-size:11px;color:var(--text2);margin-bottom:10px">${data.hop_count}跳关联</div>${chain}</div>`;
+    el.querySelectorAll(".dl").forEach(l=>l.addEventListener("click",()=>selectCo(l.dataset.id,l.dataset.lbl)));
+    showView("detail");
+    document.getElementById("detail-body").innerHTML=`
+      <div class="sec-title">路径：${from} → ${to}（${data.hop_count}跳）</div>
+      <div class="res-card">${chain}</div>
+      ${data.edges.map((e,i)=>`<div class="res-card" style="margin-top:6px;font-size:12px">
+        <b>${data.nodes[i]?.label}</b>
+        <span style="color:${ECOL[e.type]||"#888"}"> ─${ELAB[e.type]||e.type}─▶ </span>
+        <b>${data.nodes[i+1]?.label}</b>
+        <span style="float:right;color:var(--text3)">权重 ${e.weight?.toFixed?e.weight.toFixed(3):""}</span>
+      </div>`).join("")}`;
+  }catch(e){el.innerHTML=`<div class="empty">${e.message}</div>`;}
+}
+
+// ─── 概念板块 ─────────────────────────────
+async function loadConcepts(){
+  const el=document.getElementById("concept-list");
+  try{
+    const list=await GET("/api/concepts");
+    el.innerHTML=list.map(c=>`<div class="concept-row" data-cid="${c.id}" data-cname="${c.name}"><span>${c.name}</span><span style="color:var(--text3)">›</span></div>`).join("");
+    el.querySelectorAll(".concept-row").forEach(r=>r.addEventListener("click",()=>loadConceptDetail(r.dataset.cid,r.dataset.cname)));
+  }catch(e){el.innerHTML='<div class="empty">加载失败</div>';}
+}
+async function loadConceptDetail(id,name){
+  showView("detail");
+  const el=document.getElementById("detail-body");
+  el.innerHTML='<div class="loading">分析传导路径...</div>';
+  try{
+    const data=await GET("/api/concept/"+encodeURIComponent(id));
+    el.innerHTML=`
+      <div style="font-size:18px;font-weight:600;margin-bottom:6px">📡 ${name}</div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:16px">龙头种子：${data.trigger_stocks.join("、")}</div>
+      <div class="sec-title">传导受益标的</div>
+      ${data.ranked_stocks.map((s,i)=>`<div class="res-card" style="cursor:pointer" data-id="stock_${s.code}" data-lbl="${s.name}" class="cstock">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:var(--text3);width:16px">${i+1}</span>
+          <span style="font-weight:500">${s.name}</span>
+          <span class="co-code">${s.code}</span>
+          <span style="font-size:11px;color:var(--text2)">${s.industry}</span>
+          <span style="margin-left:auto;color:var(--blue);font-size:12px">${s.score.toFixed(4)}</span>
+        </div>
+        <div class="sbar"><div class="sfill" style="width:${s.score*100}%"></div></div>
+      </div>`).join("")}`;
+    el.querySelectorAll(".cstock").forEach(c=>c.addEventListener("click",()=>selectCo(c.dataset.id,c.dataset.lbl)));
+  }catch(e){el.innerHTML=`<div class="empty">${e.message}</div>`;}
+}
+
+// ─── 隐性关联 ─────────────────────────────
+async function doHidden(companyId){
+  showView("hidden");
+  const el=document.getElementById("hidden-body");
+  el.innerHTML='<div class="loading">全图扫描中...</div>';
+  try{
+    const url=(typeof companyId==="string"&&companyId)?"/api/hidden?company_id="+companyId:"/api/hidden";
+    const data=await GET(url);
+    const s=data.summary;
+    el.innerHTML=`
+      <div style="font-size:16px;font-weight:600;margin-bottom:8px">🕵️ 隐性关联发现报告</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+        <span class="tag tag-eq">股权桥梁 ${s.equity_bridges}</span>
+        <span class="tag tag-sup">供应风险 ${s.supply_risks}</span>
+        <span class="tag tag-ex">高管网络 ${s.exec_networks}</span>
+        <span class="tag tag-con">概念共振 ${s.concept_resonances}</span>
+      </div>
+      ${data.findings.map((f,i)=>{
+        const [tc,tl]=HTYPE[f.type]||["tag-neu",f.type];
+        const [sc,sl]=HSIG[f.signal]||["tag-neu",f.signal];
+        return `<div class="res-card" style="margin-bottom:10px">
+          <div style="font-size:13px;font-weight:500;margin-bottom:6px"><span style="color:var(--text3);font-size:11px;margin-right:6px">${i+1}</span>${f.title}</div>
+          <div style="margin-bottom:6px"><span class="tag ${tc}">${tl}</span><span class="tag ${sc}">${sl}</span></div>
+          <ul style="list-style:none;padding:0">${f.evidence.map(ev=>`<li style="padding-left:14px;position:relative;font-size:12px;color:var(--text2);line-height:1.7"><span style="position:absolute;left:0;color:var(--text3)">•</span>${ev}</li>`).join("")}</ul>
+          <div class="sbar"><div class="sfill" style="width:${f.score*100}%"></div></div>
+          <div style="text-align:right;font-size:11px;color:var(--text3);margin-top:4px">重要性 ${(f.score*100).toFixed(0)}%</div>
+        </div>`;
+      }).join("")}`;
+  }catch(e){
+    el.innerHTML=`<div class="empty">${e.message}<br><br><button class="btn" id="hbtn-retry">重试</button></div>`;
+    document.getElementById("hbtn-retry")?.addEventListener("click",()=>doHidden());
+  }
+}
+
+// ─── 影响力排名 ──────────────────────────
+async function doRank(){
+  const el=document.getElementById("rank-body");
+  el.innerHTML='<div class="loading">计算PageRank...</div>';
+  try{
+    const data=await GET("/api/influence");
+    const maxS=data[0]?.score||1;
+    el.innerHTML=`
+      <div style="font-size:16px;font-weight:600;margin-bottom:4px">📊 影响力排名</div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:16px">基于供应链+股权PageRank</div>
+      ${data.map(r=>`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer" class="rrow" data-id="${r.id}" data-lbl="${r.name}">
+        <span style="width:20px;font-size:11px;color:var(--text3);text-align:right">${r.rank}</span>
+        <span style="flex:1">${r.name}<span style="font-size:11px;color:var(--text3);margin-left:6px">${r.industry}</span></span>
+        <div style="width:80px"><div class="sbar"><div class="sfill" style="width:${(r.score/maxS)*100}%"></div></div></div>
+        <span style="font-size:11px;color:var(--text2);width:40px;text-align:right">${r.score.toFixed(3)}</span>
+      </div>`).join("")}`;
+    el.querySelectorAll(".rrow").forEach(r=>r.addEventListener("click",()=>selectCo(r.dataset.id,r.dataset.lbl)));
+  }catch(e){el.innerHTML=`<div class="empty">${e.message}</div>`;}
+}
+
+// ─── 图谱渲染（D3 v7）────────────────────
+async function loadFullGraph(){
+  try{const data=await GET("/api/graph_data");renderGraph(data);}catch(e){}
+}
+async function loadSubGraph(id){
+  try{const data=await GET("/api/graph_data?company_id="+id);renderGraph(data);showView("graph");}catch(e){}
+}
+
+function renderGraph(data){
+  if(_sim){_sim.stop();_sim=null;}
+  const wrap=document.getElementById("graph-wrap");
+  const W=wrap.clientWidth||900,H=wrap.clientHeight||600;
+  const svgEl=document.getElementById("graph-svg");
+  svgEl.setAttribute("width",W);svgEl.setAttribute("height",H);
+  svgEl.innerHTML="";
+  if(!data||!data.nodes||!data.nodes.length){
+    const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute("x",W/2);t.setAttribute("y",H/2);t.setAttribute("text-anchor","middle");t.setAttribute("fill","#555");t.setAttribute("font-size","13");
+    t.textContent="暂无数据，请搜索公司";svgEl.appendChild(t);return;
+  }
+  const svg=d3.select(svgEl);
+  // markers
+  const defs=svg.append("defs");
+  Object.entries(ECOL).forEach(([type,color])=>{
+    defs.append("marker").attr("id","ar-"+type).attr("viewBox","0 -4 8 8").attr("refX",22).attr("refY",0).attr("markerWidth",5).attr("markerHeight",5).attr("orient","auto")
+      .append("path").attr("d","M0,-4L8,0L0,4").attr("fill",color).attr("opacity",0.7);
+  });
+  // zoom
+  const g=svg.append("g");
+  const zoom=d3.zoom().scaleExtent([0.05,12]).on("zoom",ev=>g.attr("transform",ev.transform));
+  svg.call(zoom).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(0.7));
+  _zoom=zoom;_zSvg=svg;
+  // data
+  const nodes=data.nodes.map(n=>({...n}));
+  const nById=Object.fromEntries(nodes.map(n=>[n.id,n]));
+  const edges=data.edges.filter(e=>nById[e.source]&&nById[e.target]).map(e=>({...e}));
+  const nr=n=>n.type!=="company"?7:Math.max(7,Math.min(18,7+(n.market_cap||0)/1500));
+  // edges
+  const lsel=g.append("g").selectAll("line").data(edges).join("line")
+    .attr("stroke",d=>ECOL[d.type]||"#444")
+    .attr("stroke-width",d=>d.type==="holds"?1.8:1.2)
+    .attr("stroke-opacity",.42)
+    .attr("marker-end",d=>"url(#ar-"+d.type+")")
+    .style("cursor","pointer")
+    .on("mouseenter",function(ev,d){
+      d3.select(this).attr("stroke-opacity",1).attr("stroke-width",3);
+      const sn=typeof d.source==="object"?d.source:nById[d.source];
+      const tn=typeof d.target==="object"?d.target:nById[d.target];
+      ttShow(`<b style="color:${ECOL[d.type]}">${ELAB[d.type]||d.type}</b><br>${sn?.label||""} → ${tn?.label||""}<br>权重：${d.weight?.toFixed?d.weight.toFixed(3):d.weight}`,ev);
+    })
+    .on("mousemove",ttPos)
+    .on("mouseleave",function(ev,d){d3.select(this).attr("stroke-opacity",.42).attr("stroke-width",d.type==="holds"?1.8:1.2);ttHide();})
+    .on("click",(ev,d)=>{ev.stopPropagation();showEdgeDet(d,nById);});
+  // nodes
+  const nsel=g.append("g").selectAll("g").data(nodes).join("g")
+    .style("cursor","pointer")
+    .call(d3.drag()
+      .on("start",(ev,d)=>{if(!ev.active)_sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+      .on("drag", (ev,d)=>{d.fx=ev.x;d.fy=ev.y;})
+      .on("end",  (ev,d)=>{if(!ev.active)_sim.alphaTarget(0);d.fx=null;d.fy=null;}))
+    .on("mouseenter",(ev,d)=>{d3.select(ev.currentTarget).select("circle").attr("r",nr(d)+3).attr("fill-opacity",1);ttShow(`<b style="color:#fff">${d.label}</b><br>类型：${d.type}${d.industry?"<br>行业："+d.industry:""}${d.market_cap?"<br>市值："+d.market_cap+"亿":""}`,ev);})
+    .on("mousemove",ttPos)
+    .on("mouseleave",(ev,d)=>{d3.select(ev.currentTarget).select("circle").attr("r",nr(d)).attr("fill-opacity",.88);ttHide();})
+    .on("click",(ev,d)=>{
+      ev.stopPropagation();
+      hlNode(d,edges,lsel,nsel);
+      if(d.type==="company")selectCo(d.id,d.label);
+      else showNodeDet(d,edges,nById);
+    });
+  nsel.append("circle").attr("r",nr).attr("fill",d=>NCOL[d.type]||"#4e8ef7").attr("fill-opacity",.88).attr("stroke","#0d0f17").attr("stroke-width",1.5);
+  nsel.append("text").attr("dy",d=>nr(d)+12).attr("text-anchor","middle").attr("font-size",10).attr("fill","#8b90a8").attr("pointer-events","none").text(d=>d.label.length>5?d.label.slice(0,5)+"…":d.label);
+  // bg click cancel highlight
+  svg.on("click",()=>{
+    lsel.attr("stroke-opacity",.42).attr("stroke-width",d=>d.type==="holds"?1.8:1.2);
+    nsel.select("circle").attr("fill-opacity",.88).attr("stroke","#0d0f17").attr("stroke-width",1.5);
+  });
+  // sim
+  _sim=d3.forceSimulation(nodes)
+    .force("link",d3.forceLink(edges).id(d=>d.id).distance(100).strength(.4))
+    .force("charge",d3.forceManyBody().strength(-300))
+    .force("collide",d3.forceCollide().radius(d=>nr(d)+10))
+    .force("x",d3.forceX(0).strength(.04))
+    .force("y",d3.forceY(0).strength(.04))
+    .on("tick",()=>{
+      lsel.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+      nsel.attr("transform",d=>`translate(${d.x},${d.y})`);
+    });
+}
+
+function hlNode(d,edges,lsel,nsel){
+  const conn=new Set([d.id]);
+  edges.forEach(e=>{
+    const s=typeof e.source==="object"?e.source.id:e.source;
+    const t=typeof e.target==="object"?e.target.id:e.target;
+    if(s===d.id)conn.add(t);if(t===d.id)conn.add(s);
+  });
+  nsel.select("circle").attr("fill-opacity",n=>conn.has(n.id)?1:.15).attr("stroke",n=>n.id===d.id?"#fff":"#0d0f17").attr("stroke-width",n=>n.id===d.id?2.5:1.5);
+  lsel.attr("stroke-opacity",e=>{const s=typeof e.source==="object"?e.source.id:e.source;const t=typeof e.target==="object"?e.target.id:e.target;return(s===d.id||t===d.id)?1:.04;})
+      .attr("stroke-width",e=>{const s=typeof e.source==="object"?e.source.id:e.source;const t=typeof e.target==="object"?e.target.id:e.target;return(s===d.id||t===d.id)?3:1;});
+}
+
+function showEdgeDet(d,nById){
+  const sn=typeof d.source==="object"?d.source:nById[d.source];
+  const tn=typeof d.target==="object"?d.target:nById[d.target];
+  showView("detail");
+  document.getElementById("detail-body").innerHTML=`
+    <div class="sec-title">关系详情</div>
+    <div class="res-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+        <span style="font-weight:500">${sn?.label||""}</span>
+        <span style="color:${ECOL[d.type]||"#888"}">──${ELAB[d.type]||d.type}──▶</span>
+        <span style="font-weight:500">${tn?.label||""}</span>
+      </div>
+      <table>
+        <tr><td style="color:var(--text2)">关系类型</td><td style="color:${ECOL[d.type]}">${ELAB[d.type]||d.type}</td></tr>
+        <tr><td style="color:var(--text2)">权重</td><td>${d.weight?.toFixed?d.weight.toFixed(4):d.weight}</td></tr>
+        ${d.type==="holds"?`<tr><td style="color:var(--text2)">持股比例</td><td style="color:var(--amber)">${((d.weight||0)*100).toFixed(2)}%</td></tr>`:""}
+        ${d.type==="supplies"?`<tr><td style="color:var(--text2)">供应重要性</td><td style="color:var(--blue)">${((d.weight||0)*100).toFixed(0)}%</td></tr>`:""}
+      </table>
+      ${sn?.type==="company"?`<div style="margin-top:10px"><button class="btn sm edgebtn" data-id="${sn.id}" data-lbl="${sn.label}">查看 ${sn.label}</button></div>`:""}
+    </div>`;
+  document.querySelectorAll(".edgebtn").forEach(b=>b.addEventListener("click",()=>selectCo(b.dataset.id,b.dataset.lbl)));
+}
+
+function showNodeDet(d,edges,nById){
+  showView("detail");
+  const rel=edges.filter(e=>{const s=typeof e.source==="object"?e.source.id:e.source;const t=typeof e.target==="object"?e.target.id:e.target;return s===d.id||t===d.id;});
+  document.getElementById("detail-body").innerHTML=`
+    <div style="font-size:18px;font-weight:600;margin-bottom:4px">${d.label}</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:16px">类型：${d.type}</div>
+    <div class="sec-title">关联关系（${rel.length}条）</div>
+    ${rel.slice(0,15).map(e=>{
+      const s=typeof e.source==="object"?e.source.id:e.source;const t=typeof e.target==="object"?e.target.id:e.target;
+      const other=nById[s===d.id?t:s];
+      return `<div class="res-card" style="margin-bottom:6px${other?.type==="company"?";cursor:pointer":""}" ${other?.type==="company"?`class="ndlnk" data-id="${other.id}" data-lbl="${other.label}"`:""}> 
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+          <span style="color:${ECOL[e.type]}">${s===d.id?"→":"←"}</span>
+          <b>${other?.label||"?"}</b>
+          <span style="color:var(--text2)">${ELAB[e.type]||e.type}</span>
+          <span style="margin-left:auto;color:var(--text3)">${e.weight?.toFixed?e.weight.toFixed(3):""}</span>
+        </div></div>`;
+    }).join("")}`;
+  document.querySelectorAll(".ndlnk").forEach(c=>c.addEventListener("click",()=>selectCo(c.dataset.id,c.dataset.lbl)));
+}
+</script>
+</body>
+</html>

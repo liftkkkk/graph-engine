@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>数据管理 - 图谱引擎</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f17;--bg2:#131621;--bg3:#1a1e2e;--border:#252a40;--border2:#2f3550;--text:#e2e4ee;--text2:#8b90a8;--text3:#555c7a;--blue:#4e8ef7;--blue-bg:#1a2340;--green:#3ecf8e;--green-bg:#0d2420;--amber:#f5a623;--amber-bg:#2a1f0d;--red:#f56565;--red-bg:#2a1010}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;min-height:100vh}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;gap:16px}
+.logo{font-size:15px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.nav-link{font-size:13px;color:var(--text2);text-decoration:none;padding:4px 10px;border-radius:6px;transition:all .15s}
+.nav-link:hover{color:var(--text);background:var(--bg3)}
+.nav-link.active{color:var(--blue);background:var(--blue-bg)}
+.main{max-width:1100px;margin:0 auto;padding:28px 24px}
+h1{font-size:20px;font-weight:600;margin-bottom:6px}
+.subtitle{font-size:13px;color:var(--text2);margin-bottom:28px}
+.source-banner{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.source-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.source-dot.demo{background:var(--amber)}
+.source-dot.user{background:var(--green)}
+.source-text{flex:1;font-size:13px;color:var(--text2)}
+.source-text b{color:var(--text)}
+.btn{background:var(--blue);color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:13px;cursor:pointer;transition:opacity .15s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{opacity:.85}
+.btn.sm{padding:5px 12px;font-size:12px}
+.btn.danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+.btn.ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.btn.ghost:hover{color:var(--text);border-color:var(--border)}
+.btn.success{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px}
+.card-actions{display:flex;gap:6px;align-items:center}
+.status-badge{font-size:11px;padding:2px 8px;border-radius:10px}
+.status-user{background:var(--green-bg);color:var(--green)}
+.status-demo{background:var(--amber-bg);color:var(--amber)}
+.status-missing{background:var(--bg3);color:var(--text3)}
+.card-body{padding:14px 16px}
+.meta{font-size:12px;color:var(--text2);margin-bottom:10px}
+.fields{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.field-tag{font-size:11px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);padding:2px 8px;border-radius:4px}
+.field-tag.required{border-color:var(--blue);color:var(--blue)}
+.drop-area{border:1.5px dashed var(--border2);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:10px;position:relative}
+.drop-area:hover,.drop-area.drag-over{border-color:var(--blue);background:var(--blue-bg)}
+.drop-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-text{font-size:12px;color:var(--text2)}
+.drop-icon{font-size:20px;margin-bottom:6px}
+textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:10px;border-radius:6px;font-size:12px;font-family:monospace;resize:vertical;min-height:80px;outline:none;margin-bottom:8px}
+textarea:focus{border-color:var(--blue)}
+.toggle-text{font-size:12px;color:var(--blue);cursor:pointer;margin-bottom:8px;display:inline-block}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{color:var(--text3);font-weight:400;text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+td{padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+.preview-wrap{max-height:200px;overflow:auto;margin-top:10px;border:1px solid var(--border);border-radius:6px}
+.preview-wrap::-webkit-scrollbar{width:4px;height:4px}
+.preview-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border2);color:var(--text);padding:8px 18px;border-radius:8px;font-size:12px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.toast.error{border-color:var(--red);color:var(--red)}
+.error-box{background:var(--red-bg);border:1px solid var(--red);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--red);margin-top:8px}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.stat-item{font-size:12px;color:var(--text2)}
+.stat-item b{color:var(--text)}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><div class="logo-dot"></div>图谱引擎</div>
+  <a href="/" class="nav-link">图谱分析</a>
+  <a href="/data.html" class="nav-link active">数据管理</a>
+</header>
+
+<div class="main">
+  <h1>数据管理</h1>
+  <p class="subtitle">上传你自己的CSV数据替换内置Demo数据，图谱会立即重建。支持文件上传或直接粘贴CSV文本。</p>
+
+  <div class="source-banner" id="source-banner">
+    <div class="source-dot" id="source-dot"></div>
+    <div class="source-text" id="source-text">加载中...</div>
+    <button class="btn sm ghost" onclick="resetToDemo()">恢复Demo数据</button>
+  </div>
+
+  <div class="grid" id="cards-grid">
+    <!-- 动态生成 -->
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SCHEMAS = {
+  companies:    {label:"上市公司",     desc:"公司基础信息：代码、名称、行业、市值",       icon:"🏢", fields:["code","name","industry","market_cap","sector"], required:["code","name"]},
+  shareholding: {label:"股权关系",     desc:"谁持有哪家公司多少比例",                    icon:"📊", fields:["holder_id","holder_name","holder_type","company_code","ratio"], required:["holder_id","holder_name","holder_type","company_code","ratio"]},
+  supply_chain: {label:"供应链关系",   desc:"上下游供应关系，以及竞争关系",               icon:"🔗", fields:["supplier_code","customer_code","relation_type","importance"], required:["supplier_code","customer_code","relation_type"]},
+  concepts:     {label:"概念板块",     desc:"股票所属的概念板块及权重",                   icon:"💡", fields:["concept_id","concept_name","stock_code","weight"], required:["concept_id","concept_name","stock_code"]},
+  executives:   {label:"高管任职",     desc:"高管的历史和现任职务",                      icon:"👤", fields:["person_id","person_name","company_code","title","start_date","end_date"], required:["person_id","person_name","company_code","title"]},
+};
+
+const EXAMPLES = {
+  companies:    "code,name,industry,market_cap,sector\n300750,宁德时代,锂电池,12000,新能源\n002594,比亚迪,新能源汽车,8500,新能源",
+  shareholding: "holder_id,holder_name,holder_type,company_code,ratio\nperson_zyq,曾毓群,person,300750,0.243\ninst_hk,香港中央结算,institution,300750,0.086",
+  supply_chain: "supplier_code,customer_code,relation_type,importance\n002460,300750,supplies,0.9\n300750,002594,supplies,0.65",
+  concepts:     "concept_id,concept_name,stock_code,weight\nbattery,锂电池,300750,1.0\nbattery,锂电池,300014,0.85",
+  executives:   "person_id,person_name,company_code,title,start_date,end_date\nzyq,曾毓群,300750,董事长,2011-01-01,\nwcy,王传福,002594,董事长,1995-01-01,",
+};
+
+let fileStatus = {};
+
+async function api(url, opts={}) {
+  const r = await fetch(url, opts);
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || "请求失败");
+  return data;
+}
+
+function toast(msg, isError=false, duration=3000) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = "toast show" + (isError ? " error" : "");
+  setTimeout(() => el.className = "toast", duration);
+}
+
+async function loadStatus() {
+  try {
+    const data = await api("/api/data/status");
+    fileStatus = data.files;
+
+    // 更新banner
+    const isUser = data.source === "user";
+    document.getElementById("source-dot").className = `source-dot ${data.source}`;
+    const stats = data.stats;
+    document.getElementById("source-text").innerHTML =
+      `当前数据源：<b>${isUser ? "用户自定义数据" : "内置Demo数据"}</b>　` +
+      `节点 <b>${stats.node_count}</b>　关系 <b>${stats.edge_count}</b>　` +
+      `公司 <b>${stats.node_types?.company||0}</b>`;
+
+    if (data.errors?.length) {
+      data.errors.forEach(e => toast(`加载错误: ${e.file} - ${e.error}`, true, 6000));
+    }
+
+    renderCards();
+  } catch(e) {
+    toast("无法连接服务，请确认后端已启动", true);
+  }
+}
+
+function renderCards() {
+  const grid = document.getElementById("cards-grid");
+  grid.innerHTML = Object.entries(SCHEMAS).map(([key, schema]) => {
+    const st = fileStatus[key] || {};
+    const hasUser = st.source === "user" && st.exists;
+    const hasDemo = st.source === "demo" && st.exists;
+
+    const badge = hasUser
+      ? `<span class="status-badge status-user">用户数据 ${st.rows}行</span>`
+      : hasDemo
+      ? `<span class="status-badge status-demo">Demo ${st.rows}行</span>`
+      : `<span class="status-badge status-missing">未加载</span>`;
+
+    const fieldTags = schema.fields.map(f =>
+      `<span class="field-tag ${schema.required.includes(f) ? 'required' : ''}">${f}</span>`
+    ).join("");
+
+    return `
+    <div class="card" id="card-${key}">
+      <div class="card-header">
+        <div class="card-title">${schema.icon} ${schema.label}</div>
+        <div class="card-actions">
+          ${badge}
+          <button class="btn sm ghost" onclick="downloadTemplate('${key}')" title="下载CSV模板">⬇ 模板</button>
+          ${hasUser ? `<button class="btn sm danger" onclick="deleteData('${key}')">删除</button>` : ""}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="meta">${schema.desc}</div>
+        <div class="fields">${fieldTags}</div>
+
+        <div class="drop-area" id="drop-${key}"
+             ondragover="e=>{e.preventDefault();document.getElementById('drop-${key}').classList.add('drag-over')}"
+             ondragleave="document.getElementById('drop-${key}').classList.remove('drag-over')"
+             ondrop="handleDrop(event,'${key}')">
+          <input type="file" accept=".csv" onchange="handleFileInput(event,'${key}')">
+          <div class="drop-icon">📂</div>
+          <div class="drop-text">拖拽CSV文件到此处，或点击选择文件</div>
+        </div>
+
+        <span class="toggle-text" onclick="togglePaste('${key}')">✎ 或直接粘贴CSV文本</span>
+        <div id="paste-${key}" style="display:none">
+          <textarea id="textarea-${key}" placeholder="${EXAMPLES[key]}" rows="4"></textarea>
+          <button class="btn sm" onclick="uploadText('${key}')">导入粘贴内容</button>
+        </div>
+
+        <div id="preview-${key}"></div>
+      </div>
+    </div>`;
+  }).join("");
+
+  // 自动预览有数据的文件
+  Object.keys(SCHEMAS).forEach(key => {
+    if (fileStatus[key]?.exists) loadPreview(key);
+  });
+}
+
+function togglePaste(key) {
+  const el = document.getElementById(`paste-${key}`);
+  el.style.display = el.style.display === "none" ? "block" : "none";
+}
+
+async function loadPreview(key) {
+  try {
+    const data = await api(`/api/data/preview/${key}`);
+    if (!data.rows.length) return;
+    const el = document.getElementById(`preview-${key}`);
+    const headers = data.headers;
+    el.innerHTML = `
+      <div style="font-size:11px;color:var(--text3);margin:8px 0 4px">预览（共 ${data.total} 行，显示前20行）</div>
+      <div class="preview-wrap">
+        <table>
+          <tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr>
+          ${data.rows.map(r=>`<tr>${headers.map(h=>`<td>${r[h]||''}</td>`).join("")}</tr>`).join("")}
+        </table>
+      </div>`;
+  } catch(e) {}
+}
+
+function downloadTemplate(key) {
+  window.open(`/api/data/download/${key}`, "_blank");
+}
+
+async function deleteData(key) {
+  if (!confirm(`确定删除 ${SCHEMAS[key].label} 的用户数据？将恢复使用Demo数据。`)) return;
+  try {
+    const data = await api(`/api/data/delete/${key}`, {method:"DELETE"});
+    toast(`已删除，图谱已重建（${data.graph_stats.node_count} 节点）`);
+    await loadStatus();
+  } catch(e) {
+    toast(e.message, true);
+  }
+}
+
+async function resetToDemo() {
+  if (!confirm("确定清空所有用户数据，恢复Demo数据？")) return;
+  try {
+    const data = await api("/api/data/reset", {method:"POST"});
+    toast(data.message);
+    await loadStatus();
+  } catch(e) {
+    toast(e.message, true);
+  }
+}
+
+function handleDrop(e, key) {
+  e.preventDefault();
+  document.getElementById(`drop-${key}`).classList.remove("drag-over");
+  const file = e.dataTransfer.files[0];
+  if (file) uploadFile(key, file);
+}
+
+function handleFileInput(e, key) {
+  const file = e.target.files[0];
+  if (file) uploadFile(key, file);
+}
+
+async function uploadFile(key, file) {
+  if (!file.name.endsWith(".csv")) { toast("请选择CSV格式文件", true); return; }
+  const previewEl = document.getElementById(`preview-${key}`);
+  previewEl.innerHTML = `<div style="font-size:12px;color:var(--text2);padding:8px 0">上传中...</div>`;
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    const r = await fetch(`/api/data/upload/${key}`, {method:"POST", body: formData});
+    const data = await r.json();
+    if (!r.ok) {
+      previewEl.innerHTML = `<div class="error-box">${data.error}${data.required ? '<br>必填字段：'+data.required.join(", ") : ""}</div>`;
+      return;
+    }
+    toast(`${SCHEMAS[key].label}：已导入 ${data.rows_imported} 行，图谱已重建`);
+    await loadStatus();
+  } catch(e) {
+    toast(e.message, true);
+    previewEl.innerHTML = "";
+  }
+}
+
+async function uploadText(key) {
+  const text = document.getElementById(`textarea-${key}`).value.trim();
+  if (!text) { toast("请先输入CSV内容", true); return; }
+  try {
+    const r = await fetch(`/api/data/upload/${key}`, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({csv_text: text})
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      toast(`${data.error}`, true);
+      return;
+    }
+    toast(`${SCHEMAS[key].label}：已导入 ${data.rows_imported} 行，图谱已重建`);
+    document.getElementById(`textarea-${key}`).value = "";
+    document.getElementById(`paste-${key}`).style.display = "none";
+    await loadStatus();
+  } catch(e) {
+    toast(e.message, true);
+  }
+}
+
+loadStatus();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+concept_id,concept_name,stock_code,weight
+nev,新能源汽车,002594,1.0
+nev,新能源汽车,300750,0.9
+nev,新能源汽车,300014,0.7
+nev,新能源汽车,002074,0.6
+battery,锂电池,300750,1.0
+battery,锂电池,300014,0.85
+battery,锂电池,002074,0.8
+battery,锂电池,300438,0.7
+lithium,锂资源,002460,1.0
+lithium,锂资源,601899,0.7
+energy_storage,储能,300438,1.0
+energy_storage,储能,300014,0.8
+energy_storage,储能,300750,0.75

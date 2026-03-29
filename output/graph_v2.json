@@ -1,0 +1,1651 @@
+{
+  "nodes": [
+    {
+      "id": "stock_300750",
+      "label": "宁德时代",
+      "type": "company",
+      "code": "300750",
+      "industry": "锂电池",
+      "market_cap": 12000.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002594",
+      "label": "比亚迪",
+      "type": "company",
+      "code": "002594",
+      "industry": "新能源汽车",
+      "market_cap": 8500.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002460",
+      "label": "赣锋锂业",
+      "type": "company",
+      "code": "002460",
+      "industry": "锂资源",
+      "market_cap": 2100.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_601899",
+      "label": "紫金矿业",
+      "type": "company",
+      "code": "601899",
+      "industry": "有色金属",
+      "market_cap": 3500.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300014",
+      "label": "亿纬锂能",
+      "type": "company",
+      "code": "300014",
+      "industry": "锂电池",
+      "market_cap": 1500.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_603659",
+      "label": "璞泰来",
+      "type": "company",
+      "code": "603659",
+      "industry": "锂电材料",
+      "market_cap": 820.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002074",
+      "label": "国轩高科",
+      "type": "company",
+      "code": "002074",
+      "industry": "锂电池",
+      "market_cap": 720.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300438",
+      "label": "鹏辉能源",
+      "type": "company",
+      "code": "300438",
+      "industry": "储能",
+      "market_cap": 610.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688567",
+      "label": "孚能科技",
+      "type": "company",
+      "code": "688567",
+      "industry": "动力电池",
+      "market_cap": 480.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002709",
+      "label": "天赐材料",
+      "type": "company",
+      "code": "002709",
+      "industry": "电解液",
+      "market_cap": 560.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_301358",
+      "label": "华盛锂电",
+      "type": "company",
+      "code": "301358",
+      "industry": "电解液",
+      "market_cap": 290.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688336",
+      "label": "七彩化学",
+      "type": "company",
+      "code": "688336",
+      "industry": "锂电材料",
+      "market_cap": 210.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_603501",
+      "label": "韦尔股份",
+      "type": "company",
+      "code": "603501",
+      "industry": "半导体设计",
+      "market_cap": 1800.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002049",
+      "label": "紫光国微",
+      "type": "company",
+      "code": "002049",
+      "industry": "半导体",
+      "market_cap": 1200.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688981",
+      "label": "中芯国际",
+      "type": "company",
+      "code": "688981",
+      "industry": "晶圆代工",
+      "market_cap": 4200.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300661",
+      "label": "圣邦股份",
+      "type": "company",
+      "code": "300661",
+      "industry": "模拟芯片",
+      "market_cap": 780.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688012",
+      "label": "中微公司",
+      "type": "company",
+      "code": "688012",
+      "industry": "半导体设备",
+      "market_cap": 1100.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688041",
+      "label": "海光信息",
+      "type": "company",
+      "code": "688041",
+      "industry": "CPU芯片",
+      "market_cap": 2300.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688396",
+      "label": "华润微",
+      "type": "company",
+      "code": "688396",
+      "industry": "功率半导体",
+      "market_cap": 890.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300782",
+      "label": "卓胜微",
+      "type": "company",
+      "code": "300782",
+      "industry": "射频芯片",
+      "market_cap": 650.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688185",
+      "label": "康希通信",
+      "type": "company",
+      "code": "688185",
+      "industry": "射频器件",
+      "market_cap": 320.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688819",
+      "label": "天岳先进",
+      "type": "company",
+      "code": "688819",
+      "industry": "碳化硅",
+      "market_cap": 280.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_600276",
+      "label": "恒瑞医药",
+      "type": "company",
+      "code": "600276",
+      "industry": "创新药",
+      "market_cap": 2800.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300760",
+      "label": "迈瑞医疗",
+      "type": "company",
+      "code": "300760",
+      "industry": "医疗器械",
+      "market_cap": 3200.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688180",
+      "label": "君实生物",
+      "type": "company",
+      "code": "688180",
+      "industry": "生物药",
+      "market_cap": 680.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688389",
+      "label": "普蕊斯",
+      "type": "company",
+      "code": "688389",
+      "industry": "CRO",
+      "market_cap": 210.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300347",
+      "label": "泰格医药",
+      "type": "company",
+      "code": "300347",
+      "industry": "CRO",
+      "market_cap": 890.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_603259",
+      "label": "药明康德",
+      "type": "company",
+      "code": "603259",
+      "industry": "CDMO",
+      "market_cap": 2100.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300601",
+      "label": "康泰生物",
+      "type": "company",
+      "code": "300601",
+      "industry": "疫苗",
+      "market_cap": 780.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688321",
+      "label": "荣昌生物",
+      "type": "company",
+      "code": "688321",
+      "industry": "生物药",
+      "market_cap": 460.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_600519",
+      "label": "贵州茅台",
+      "type": "company",
+      "code": "600519",
+      "industry": "白酒",
+      "market_cap": 22000.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_000858",
+      "label": "五粮液",
+      "type": "company",
+      "code": "000858",
+      "industry": "白酒",
+      "market_cap": 6800.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_600887",
+      "label": "伊利股份",
+      "type": "company",
+      "code": "600887",
+      "industry": "乳制品",
+      "market_cap": 1800.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_603288",
+      "label": "海天味业",
+      "type": "company",
+      "code": "603288",
+      "industry": "调味品",
+      "market_cap": 2100.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002304",
+      "label": "洋河股份",
+      "type": "company",
+      "code": "002304",
+      "industry": "白酒",
+      "market_cap": 1700.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_000568",
+      "label": "泸州老窖",
+      "type": "company",
+      "code": "000568",
+      "industry": "白酒",
+      "market_cap": 1900.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_601318",
+      "label": "中国平安",
+      "type": "company",
+      "code": "601318",
+      "industry": "保险",
+      "market_cap": 8800.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_600036",
+      "label": "招商银行",
+      "type": "company",
+      "code": "600036",
+      "industry": "银行",
+      "market_cap": 9200.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_601688",
+      "label": "华泰证券",
+      "type": "company",
+      "code": "601688",
+      "industry": "证券",
+      "market_cap": 1800.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_600030",
+      "label": "中信证券",
+      "type": "company",
+      "code": "600030",
+      "industry": "证券",
+      "market_cap": 2400.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_002415",
+      "label": "海康威视",
+      "type": "company",
+      "code": "002415",
+      "industry": "智能安防",
+      "market_cap": 3200.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_688111",
+      "label": "金山办公",
+      "type": "company",
+      "code": "688111",
+      "industry": "办公软件",
+      "market_cap": 1200.0,
+      "list_date": ""
+    },
+    {
+      "id": "stock_300459",
+      "label": "汤姆猫",
+      "type": "company",
+      "code": "300459",
+      "industry": "移动游戏",
+      "market_cap": 320.0,
+      "list_date": ""
+    },
+    {
+      "id": "person_zyq",
+      "label": "曾毓群",
+      "type": "person",
+      "name": "曾毓群"
+    },
+    {
+      "id": "person_wcy",
+      "label": "王传福",
+      "type": "person",
+      "name": "王传福"
+    },
+    {
+      "id": "person_lhm",
+      "label": "李春梅",
+      "type": "person",
+      "name": "李春梅"
+    },
+    {
+      "id": "person_clh",
+      "label": "陈李花",
+      "type": "person",
+      "name": "陈李花"
+    },
+    {
+      "id": "inst_hk",
+      "label": "香港中央结算",
+      "type": "institution",
+      "name": "香港中央结算"
+    },
+    {
+      "id": "inst_efunda",
+      "label": "易方达基金",
+      "type": "institution",
+      "name": "易方达基金"
+    },
+    {
+      "id": "inst_harvest",
+      "label": "嘉实基金",
+      "type": "institution",
+      "name": "嘉实基金"
+    },
+    {
+      "id": "person_yuzj",
+      "label": "虞仁荣",
+      "type": "person",
+      "name": "虞仁荣"
+    },
+    {
+      "id": "person_zhangf",
+      "label": "张汝京",
+      "type": "person",
+      "name": "张汝京"
+    },
+    {
+      "id": "inst_sd",
+      "label": "国家大基金二期",
+      "type": "institution",
+      "name": "国家大基金二期"
+    },
+    {
+      "id": "person_sunp",
+      "label": "孙飘扬",
+      "type": "person",
+      "name": "孙飘扬"
+    },
+    {
+      "id": "person_liy",
+      "label": "李宇",
+      "type": "person",
+      "name": "李宇"
+    },
+    {
+      "id": "inst_moutai_gov",
+      "label": "茅台集团",
+      "type": "institution",
+      "name": "茅台集团"
+    },
+    {
+      "id": "person_ding",
+      "label": "丁世家",
+      "type": "person",
+      "name": "丁世家"
+    },
+    {
+      "id": "concept_nev",
+      "label": "新能源汽车",
+      "type": "concept"
+    },
+    {
+      "id": "concept_battery",
+      "label": "锂电池",
+      "type": "concept"
+    },
+    {
+      "id": "concept_lithium",
+      "label": "锂资源",
+      "type": "concept"
+    },
+    {
+      "id": "concept_cathode",
+      "label": "正极材料",
+      "type": "concept"
+    },
+    {
+      "id": "concept_electrolyte",
+      "label": "电解液",
+      "type": "concept"
+    },
+    {
+      "id": "concept_energy_storage",
+      "label": "储能",
+      "type": "concept"
+    },
+    {
+      "id": "concept_solid_battery",
+      "label": "固态电池",
+      "type": "concept"
+    },
+    {
+      "id": "concept_chip",
+      "label": "芯片",
+      "type": "concept"
+    },
+    {
+      "id": "concept_sic",
+      "label": "碳化硅",
+      "type": "concept"
+    },
+    {
+      "id": "concept_semi_equip",
+      "label": "半导体设备",
+      "type": "concept"
+    },
+    {
+      "id": "concept_analog_chip",
+      "label": "模拟芯片",
+      "type": "concept"
+    },
+    {
+      "id": "concept_rf_chip",
+      "label": "射频芯片",
+      "type": "concept"
+    },
+    {
+      "id": "concept_innovative_drug",
+      "label": "创新药",
+      "type": "concept"
+    },
+    {
+      "id": "concept_cro",
+      "label": "CRO",
+      "type": "concept"
+    },
+    {
+      "id": "concept_medical_device",
+      "label": "医疗器械",
+      "type": "concept"
+    },
+    {
+      "id": "concept_vaccine",
+      "label": "疫苗",
+      "type": "concept"
+    },
+    {
+      "id": "concept_baijiu",
+      "label": "白酒",
+      "type": "concept"
+    },
+    {
+      "id": "concept_condiment",
+      "label": "调味品",
+      "type": "concept"
+    },
+    {
+      "id": "concept_ai",
+      "label": "人工智能",
+      "type": "concept"
+    },
+    {
+      "id": "concept_carbon_neutral",
+      "label": "碳中和",
+      "type": "concept"
+    },
+    {
+      "id": "concept_data_security",
+      "label": "数据安全",
+      "type": "concept"
+    },
+    {
+      "id": "concept_state_owned",
+      "label": "央国企改革",
+      "type": "concept"
+    },
+    {
+      "id": "person_wxy",
+      "label": "吴晓宇",
+      "type": "person",
+      "name": "吴晓宇"
+    },
+    {
+      "id": "person_zhangl",
+      "label": "张磊（高瓴）",
+      "type": "person",
+      "name": "张磊（高瓴）"
+    },
+    {
+      "id": "person_liuqh",
+      "label": "刘庆华",
+      "type": "person",
+      "name": "刘庆华"
+    },
+    {
+      "id": "person_chenwh",
+      "label": "陈伟鸿",
+      "type": "person",
+      "name": "陈伟鸿"
+    }
+  ],
+  "edges": [
+    {
+      "source": "person_zyq",
+      "target": "stock_300750",
+      "type": "holds",
+      "weight": 0.243,
+      "ratio": 0.243
+    },
+    {
+      "source": "person_zyq",
+      "target": "stock_300750",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长兼CEO",
+      "start_date": "2011-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_wcy",
+      "target": "stock_002594",
+      "type": "holds",
+      "weight": 0.172,
+      "ratio": 0.172
+    },
+    {
+      "source": "person_wcy",
+      "target": "stock_002594",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长",
+      "start_date": "1995-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_lhm",
+      "target": "stock_002460",
+      "type": "holds",
+      "weight": 0.089,
+      "ratio": 0.089
+    },
+    {
+      "source": "person_lhm",
+      "target": "stock_002460",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长",
+      "start_date": "2016-03-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_clh",
+      "target": "stock_002460",
+      "type": "holds",
+      "weight": 0.043,
+      "ratio": 0.043
+    },
+    {
+      "source": "inst_hk",
+      "target": "stock_300750",
+      "type": "holds",
+      "weight": 0.086,
+      "ratio": 0.086
+    },
+    {
+      "source": "inst_hk",
+      "target": "stock_002594",
+      "type": "holds",
+      "weight": 0.072,
+      "ratio": 0.072
+    },
+    {
+      "source": "inst_hk",
+      "target": "stock_688981",
+      "type": "holds",
+      "weight": 0.091,
+      "ratio": 0.091
+    },
+    {
+      "source": "inst_hk",
+      "target": "stock_600519",
+      "type": "holds",
+      "weight": 0.095,
+      "ratio": 0.095
+    },
+    {
+      "source": "inst_efunda",
+      "target": "stock_300750",
+      "type": "holds",
+      "weight": 0.032,
+      "ratio": 0.032
+    },
+    {
+      "source": "inst_efunda",
+      "target": "stock_002594",
+      "type": "holds",
+      "weight": 0.021,
+      "ratio": 0.021
+    },
+    {
+      "source": "inst_efunda",
+      "target": "stock_600519",
+      "type": "holds",
+      "weight": 0.041,
+      "ratio": 0.041
+    },
+    {
+      "source": "inst_efunda",
+      "target": "stock_600276",
+      "type": "holds",
+      "weight": 0.028,
+      "ratio": 0.028
+    },
+    {
+      "source": "inst_harvest",
+      "target": "stock_688981",
+      "type": "holds",
+      "weight": 0.018,
+      "ratio": 0.018
+    },
+    {
+      "source": "inst_harvest",
+      "target": "stock_603501",
+      "type": "holds",
+      "weight": 0.024,
+      "ratio": 0.024
+    },
+    {
+      "source": "inst_harvest",
+      "target": "stock_300760",
+      "type": "holds",
+      "weight": 0.031,
+      "ratio": 0.031
+    },
+    {
+      "source": "stock_300750",
+      "target": "stock_002074",
+      "type": "holds",
+      "weight": 0.238,
+      "ratio": 0.238
+    },
+    {
+      "source": "stock_300750",
+      "target": "stock_688567",
+      "type": "holds",
+      "weight": 0.156,
+      "ratio": 0.156
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.65
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300014",
+      "type": "competes",
+      "weight": 0.85
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002074",
+      "type": "competes",
+      "weight": 0.78
+    },
+    {
+      "source": "stock_300750",
+      "target": "concept_nev",
+      "type": "belongs_to",
+      "weight": 0.92
+    },
+    {
+      "source": "stock_300750",
+      "target": "concept_battery",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_300750",
+      "target": "concept_energy_storage",
+      "type": "belongs_to",
+      "weight": 0.78
+    },
+    {
+      "source": "stock_300750",
+      "target": "concept_solid_battery",
+      "type": "belongs_to",
+      "weight": 0.92
+    },
+    {
+      "source": "stock_300750",
+      "target": "concept_ai",
+      "type": "belongs_to",
+      "weight": 0.65
+    },
+    {
+      "source": "stock_300750",
+      "target": "concept_carbon_neutral",
+      "type": "belongs_to",
+      "weight": 0.91
+    },
+    {
+      "source": "stock_002594",
+      "target": "stock_301358",
+      "type": "holds",
+      "weight": 0.112,
+      "ratio": 0.112
+    },
+    {
+      "source": "stock_002594",
+      "target": "concept_nev",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_002594",
+      "target": "concept_battery",
+      "type": "belongs_to",
+      "weight": 0.65
+    },
+    {
+      "source": "stock_002594",
+      "target": "concept_carbon_neutral",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "person_yuzj",
+      "target": "stock_300782",
+      "type": "holds",
+      "weight": 0.412,
+      "ratio": 0.412
+    },
+    {
+      "source": "person_yuzj",
+      "target": "stock_300782",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长",
+      "start_date": "2012-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_yuzj",
+      "target": "stock_688185",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "实控人关联",
+      "start_date": "2020-06-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_zhangf",
+      "target": "stock_688981",
+      "type": "holds",
+      "weight": 0.002,
+      "ratio": 0.002
+    },
+    {
+      "source": "inst_sd",
+      "target": "stock_688981",
+      "type": "holds",
+      "weight": 0.089,
+      "ratio": 0.089
+    },
+    {
+      "source": "inst_sd",
+      "target": "stock_688012",
+      "type": "holds",
+      "weight": 0.124,
+      "ratio": 0.124
+    },
+    {
+      "source": "inst_sd",
+      "target": "stock_688396",
+      "type": "holds",
+      "weight": 0.098,
+      "ratio": 0.098
+    },
+    {
+      "source": "inst_sd",
+      "target": "stock_688819",
+      "type": "holds",
+      "weight": 0.076,
+      "ratio": 0.076
+    },
+    {
+      "source": "person_sunp",
+      "target": "stock_600276",
+      "type": "holds",
+      "weight": 0.218,
+      "ratio": 0.218
+    },
+    {
+      "source": "person_sunp",
+      "target": "stock_600276",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长",
+      "start_date": "1995-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_sunp",
+      "target": "stock_688321",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "战略顾问",
+      "start_date": "2021-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_liy",
+      "target": "stock_603259",
+      "type": "holds",
+      "weight": 0.045,
+      "ratio": 0.045
+    },
+    {
+      "source": "person_liy",
+      "target": "stock_603259",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "联席CEO",
+      "start_date": "2017-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_liy",
+      "target": "stock_300347",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "独立董事",
+      "start_date": "2020-06-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "inst_moutai_gov",
+      "target": "stock_600519",
+      "type": "holds",
+      "weight": 0.541,
+      "ratio": 0.541
+    },
+    {
+      "source": "person_ding",
+      "target": "stock_603288",
+      "type": "holds",
+      "weight": 0.368,
+      "ratio": 0.368
+    },
+    {
+      "source": "person_ding",
+      "target": "stock_603288",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长",
+      "start_date": "2000-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002460",
+      "type": "supplies",
+      "weight": 0.82
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002709",
+      "type": "supplies",
+      "weight": 0.45
+    },
+    {
+      "source": "stock_601899",
+      "target": "concept_lithium",
+      "type": "belongs_to",
+      "weight": 0.78
+    },
+    {
+      "source": "stock_601899",
+      "target": "concept_carbon_neutral",
+      "type": "belongs_to",
+      "weight": 0.72
+    },
+    {
+      "source": "stock_601899",
+      "target": "concept_state_owned",
+      "type": "belongs_to",
+      "weight": 0.85
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300750",
+      "type": "supplies",
+      "weight": 0.91
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.68
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300014",
+      "type": "supplies",
+      "weight": 0.55
+    },
+    {
+      "source": "stock_002460",
+      "target": "concept_lithium",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_002460",
+      "target": "concept_carbon_neutral",
+      "type": "belongs_to",
+      "weight": 0.68
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300750",
+      "type": "supplies",
+      "weight": 0.88
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300014",
+      "type": "supplies",
+      "weight": 0.72
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002074",
+      "type": "supplies",
+      "weight": 0.61
+    },
+    {
+      "source": "stock_002709",
+      "target": "concept_electrolyte",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300750",
+      "type": "supplies",
+      "weight": 0.87
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300014",
+      "type": "supplies",
+      "weight": 0.76
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002074",
+      "type": "supplies",
+      "weight": 0.58
+    },
+    {
+      "source": "stock_603659",
+      "target": "concept_cathode",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_603659",
+      "type": "supplies",
+      "weight": 0.71
+    },
+    {
+      "source": "stock_688336",
+      "target": "concept_lithium",
+      "type": "belongs_to",
+      "weight": 0.52
+    },
+    {
+      "source": "stock_688336",
+      "target": "concept_cathode",
+      "type": "belongs_to",
+      "weight": 0.82
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.42
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688567",
+      "type": "supplies",
+      "weight": 0.38
+    },
+    {
+      "source": "stock_300014",
+      "target": "concept_nev",
+      "type": "belongs_to",
+      "weight": 0.75
+    },
+    {
+      "source": "stock_300014",
+      "target": "concept_battery",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "stock_300014",
+      "target": "concept_energy_storage",
+      "type": "belongs_to",
+      "weight": 0.85
+    },
+    {
+      "source": "stock_300014",
+      "target": "concept_solid_battery",
+      "type": "belongs_to",
+      "weight": 0.81
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.31
+    },
+    {
+      "source": "stock_002074",
+      "target": "concept_nev",
+      "type": "belongs_to",
+      "weight": 0.68
+    },
+    {
+      "source": "stock_002074",
+      "target": "concept_battery",
+      "type": "belongs_to",
+      "weight": 0.82
+    },
+    {
+      "source": "stock_002074",
+      "target": "concept_energy_storage",
+      "type": "belongs_to",
+      "weight": 0.72
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.29
+    },
+    {
+      "source": "stock_300438",
+      "target": "concept_nev",
+      "type": "belongs_to",
+      "weight": 0.55
+    },
+    {
+      "source": "stock_300438",
+      "target": "concept_battery",
+      "type": "belongs_to",
+      "weight": 0.74
+    },
+    {
+      "source": "stock_300438",
+      "target": "concept_energy_storage",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_300438",
+      "target": "concept_carbon_neutral",
+      "type": "belongs_to",
+      "weight": 0.85
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.44
+    },
+    {
+      "source": "stock_688567",
+      "target": "concept_nev",
+      "type": "belongs_to",
+      "weight": 0.61
+    },
+    {
+      "source": "stock_688567",
+      "target": "concept_battery",
+      "type": "belongs_to",
+      "weight": 0.71
+    },
+    {
+      "source": "stock_688567",
+      "target": "concept_solid_battery",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300750",
+      "type": "supplies",
+      "weight": 0.52
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002594",
+      "type": "supplies",
+      "weight": 0.61
+    },
+    {
+      "source": "stock_301358",
+      "target": "concept_cathode",
+      "type": "belongs_to",
+      "weight": 0.71
+    },
+    {
+      "source": "stock_301358",
+      "target": "concept_electrolyte",
+      "type": "belongs_to",
+      "weight": 0.86
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688981",
+      "type": "supplies",
+      "weight": 0.76
+    },
+    {
+      "source": "stock_688819",
+      "target": "concept_sic",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688981",
+      "type": "supplies",
+      "weight": 0.89
+    },
+    {
+      "source": "stock_688012",
+      "target": "concept_semi_equip",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688041",
+      "type": "supplies",
+      "weight": 0.54
+    },
+    {
+      "source": "stock_688396",
+      "target": "concept_sic",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_603501",
+      "type": "supplies",
+      "weight": 0.72
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300661",
+      "type": "supplies",
+      "weight": 0.68
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002049",
+      "type": "supplies",
+      "weight": 0.61
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300782",
+      "type": "supplies",
+      "weight": 0.55
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002049",
+      "type": "competes",
+      "weight": 0.71
+    },
+    {
+      "source": "stock_688981",
+      "target": "concept_chip",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_688981",
+      "target": "concept_state_owned",
+      "type": "belongs_to",
+      "weight": 0.78
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300782",
+      "type": "supplies",
+      "weight": 0.82
+    },
+    {
+      "source": "stock_688185",
+      "target": "concept_rf_chip",
+      "type": "belongs_to",
+      "weight": 0.91
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_600276",
+      "type": "supplies",
+      "weight": 0.58
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688180",
+      "type": "supplies",
+      "weight": 0.72
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688321",
+      "type": "supplies",
+      "weight": 0.65
+    },
+    {
+      "source": "stock_603259",
+      "target": "concept_cro",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_600276",
+      "type": "supplies",
+      "weight": 0.45
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_688180",
+      "type": "supplies",
+      "weight": 0.51
+    },
+    {
+      "source": "stock_300347",
+      "target": "concept_cro",
+      "type": "belongs_to",
+      "weight": 0.91
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_300347",
+      "type": "supplies",
+      "weight": 0.38
+    },
+    {
+      "source": "stock_688389",
+      "target": "concept_cro",
+      "type": "belongs_to",
+      "weight": 0.78
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_000858",
+      "type": "competes",
+      "weight": 0.92
+    },
+    {
+      "source": "supply_chain",
+      "target": "stock_002304",
+      "type": "competes",
+      "weight": 0.88
+    },
+    {
+      "source": "stock_600519",
+      "target": "concept_baijiu",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_688041",
+      "target": "concept_chip",
+      "type": "belongs_to",
+      "weight": 0.91
+    },
+    {
+      "source": "stock_002049",
+      "target": "concept_chip",
+      "type": "belongs_to",
+      "weight": 0.85
+    },
+    {
+      "source": "stock_002049",
+      "target": "concept_sic",
+      "type": "belongs_to",
+      "weight": 0.72
+    },
+    {
+      "source": "stock_002049",
+      "target": "concept_data_security",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "stock_603501",
+      "target": "concept_chip",
+      "type": "belongs_to",
+      "weight": 0.82
+    },
+    {
+      "source": "stock_603501",
+      "target": "concept_analog_chip",
+      "type": "belongs_to",
+      "weight": 0.72
+    },
+    {
+      "source": "stock_300782",
+      "target": "concept_chip",
+      "type": "belongs_to",
+      "weight": 0.78
+    },
+    {
+      "source": "stock_300782",
+      "target": "concept_rf_chip",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_300661",
+      "target": "concept_analog_chip",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_600276",
+      "target": "concept_innovative_drug",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_688180",
+      "target": "concept_innovative_drug",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "stock_688180",
+      "target": "concept_vaccine",
+      "type": "belongs_to",
+      "weight": 0.72
+    },
+    {
+      "source": "stock_688321",
+      "target": "concept_innovative_drug",
+      "type": "belongs_to",
+      "weight": 0.82
+    },
+    {
+      "source": "stock_300601",
+      "target": "concept_innovative_drug",
+      "type": "belongs_to",
+      "weight": 0.61
+    },
+    {
+      "source": "stock_300601",
+      "target": "concept_vaccine",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_300760",
+      "target": "concept_medical_device",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_000858",
+      "target": "concept_baijiu",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "stock_002304",
+      "target": "concept_baijiu",
+      "type": "belongs_to",
+      "weight": 0.82
+    },
+    {
+      "source": "stock_000568",
+      "target": "concept_baijiu",
+      "type": "belongs_to",
+      "weight": 0.79
+    },
+    {
+      "source": "stock_603288",
+      "target": "concept_condiment",
+      "type": "belongs_to",
+      "weight": 1.0
+    },
+    {
+      "source": "stock_002415",
+      "target": "concept_ai",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "stock_002415",
+      "target": "concept_data_security",
+      "type": "belongs_to",
+      "weight": 0.82
+    },
+    {
+      "source": "stock_688111",
+      "target": "concept_ai",
+      "type": "belongs_to",
+      "weight": 0.72
+    },
+    {
+      "source": "stock_688111",
+      "target": "concept_data_security",
+      "type": "belongs_to",
+      "weight": 0.71
+    },
+    {
+      "source": "stock_601318",
+      "target": "concept_state_owned",
+      "type": "belongs_to",
+      "weight": 0.92
+    },
+    {
+      "source": "stock_600036",
+      "target": "concept_state_owned",
+      "type": "belongs_to",
+      "weight": 0.88
+    },
+    {
+      "source": "person_wxy",
+      "target": "stock_300750",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "CFO",
+      "start_date": "2018-06-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_wxy",
+      "target": "stock_002074",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "独立董事",
+      "start_date": "2021-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_zhangl",
+      "target": "stock_300750",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事",
+      "start_date": "2021-06-01",
+      "end_date": "2023-06-01",
+      "is_current": false
+    },
+    {
+      "source": "person_zhangl",
+      "target": "stock_688180",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事",
+      "start_date": "2020-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_zhangl",
+      "target": "stock_603259",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事",
+      "start_date": "2019-06-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_liuqh",
+      "target": "stock_688012",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "董事长",
+      "start_date": "2014-01-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_liuqh",
+      "target": "stock_688819",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "独立董事",
+      "start_date": "2022-03-01",
+      "end_date": "",
+      "is_current": true
+    },
+    {
+      "source": "person_chenwh",
+      "target": "stock_300750",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "前副总裁",
+      "start_date": "2015-01-01",
+      "end_date": "2022-09-01",
+      "is_current": false
+    },
+    {
+      "source": "person_chenwh",
+      "target": "stock_688567",
+      "type": "employs",
+      "weight": 1.0,
+      "title": "CEO",
+      "start_date": "2022-10-01",
+      "end_date": "",
+      "is_current": true
+    }
+  ]
+}

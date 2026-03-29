@@ -1,0 +1,8 @@
+holder_id,holder_name,holder_type,company_code,ratio
+person_wcy,王传福,person,002594,0.172
+inst_hk,香港中央结算,institution,300750,0.086
+inst_hk,香港中央结算,institution,002594,0.072
+company_catl_hk,宁德时代香港子公司,company,002074,0.238
+person_zengyq,曾毓群,person,300750,0.243
+inst_fund1,易方达基金,institution,300750,0.032
+inst_fund1,易方达基金,institution,002594,0.021

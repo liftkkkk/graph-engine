@@ -1,0 +1,8 @@
+supplier_code,customer_code,relation_type,importance
+002460,300750,supplies,0.9
+002460,002594,supplies,0.7
+601899,002460,supplies,0.8
+300750,002594,supplies,0.6
+603659,300750,supplies,0.85
+603659,300014,supplies,0.75
+300014,002594,supplies,0.5
